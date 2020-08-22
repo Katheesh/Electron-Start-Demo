@@ -1,17 +1,22 @@
 {
-  "name": "electron-demo",
+  "name": "electron-test",
   "version": "1.0.0",
-  "description": "Electron demo app for a school presentation",
-  "main": "main.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w sqlite3",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Simon Schiller",
-  "license": "MIT",
-  "devDependencies": {
-    "electron": "^1.4.8"
-  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "nedb": "^1.8.0"
+    "electron": "^5.0.6",
+    "knex": "^0.19.0",
+    "sqlite3": "^4.0.9"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^1.8.5"
   }
 }

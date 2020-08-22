@@ -1,53 +1,91 @@
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Electron Demo</title>
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/index.css">
-  <script type="text/javascript" src="js/index.js"></script>
+    <title>SciNav Quiz</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/script.js"></script>
+    <script>
+        const electron = require("electron");
+        const ipc = electron.ipcRenderer;
+        document.addEventListener("DOMContentLoaded", function(){
+            ipc.send("mainWindowLoaded")
+            ipc.on("resultSent", function(evt, result){
+                let resultEl = document.getElementById("result");
+                console.log(result);
+                for(var i = 0; i < result.length;i++){
+                    resultEl.innerHTML += "First Name: " + result[i].FirstName.toString() + "   |  Last Name: " + result[i].LastName.toString() + "<br/>";
+                }
+            });
+        });
+    </script>
 </head>
-<body>
-  <div class="container">
-
-    <h3>Add a person:</h3>
-    <div class="row">
-      <div class="five columns">
-        <label for="firstname">Firstname</label>
-        <input class="u-full-width" placeholder="John" id="firstname" type="text">
-      </div>
-      <div class="five columns">
-        <label for="lastname">Lastname</label>
-        <input class="u-full-width" placeholder="Doe" id="lastname" type="text">
-      </div>
-      <div class="two columns">
-        <label for="add" class="invisible">x</label>
-        <input class="button-primary" value="Add" id="add" type="button">
-      </div>
+<body> 
+<aside class="sidebar-left-collapse">
+  <a href="#" class="company-logo">Logo</a>
+  <div class="sidebar-links">
+    <div class="link-blue selected">
+      <a href="#">
+        <i class="fa fa-picture-o"></i>Photography
+      </a>
+      <ul class="sub-links">
+        <li><a href="#">Portraits</a></li>
+        <li><a href="#">Landscape</a></li>
+        <li><a href="#">Studio shots</a></li>
+        <li><a href="#">Macros</a></li>
+      </ul>
     </div>
 
-    <h3>All persons:</h3>
-    <table class="u-full-width">
-      <thead>
-        <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="tablebody">
-      </tbody>
-    </table>
+    <div class="link-red">
+      <a href="#">
+        <i class="fa fa-heart-o"></i>Favorites
+      </a>
+
+      <ul class="sub-links">
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+        <li><a href="#">Link 3</a></li>
+        <li><a href="#">Link 4</a></li>
+      </ul>
+    </div>
+
+    <div class="link-yellow">
+      <a href="#">
+        <i class="fa fa-keyboard-o"></i>Projects
+      </a>
+
+      <ul class="sub-links">
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+        <li><a href="#">Link 3</a></li>
+        <li><a href="#">Link 4</a></li>
+      </ul>
+    </div>
+
+    <div class="link-green">
+      <a href="#">
+        <i class="fa fa-map-marker"></i>Places
+      </a>
+
+      <ul class="sub-links">
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+        <li><a href="#">Link 3</a></li>
+        <li><a href="#">Link 4</a></li>
+      </ul>
+    </div>
+
   </div>
 
-  <script type="text/javascript">
-    var remote = require('electron').remote;
-    document.addEventListener('keydown', function (e) {
-      if (e.which === 123) {
-        remote.getCurrentWindow().webContents.openDevTools();
-      } else if (e.which === 116) {
-        location.reload();
-      }
-    });
-</script>
+</aside>
+
+<div class="main-content">
+  <div class="menu">
+    <img class="arrow left" src="assets/images/demo-arrow-left.png" alt="arrow" height="120">
+    <img class="arrow up" src="assets/images/demo-arrow-up.png" alt="arrow" height="150">
+    <h1>Freebie: 5 Responsive Sidebar Templates</h1>
+    <h2><a href="http://tutorialzine.com/2015/04/freebie-5-elegant-and-responsive-sidebar-templates/">Download</a></h2>
+    <p id="result"></p>
+  </div>
+</div> 
+
 </body>
 </html>
